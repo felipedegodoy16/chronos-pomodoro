@@ -1,0 +1,12 @@
+.container-fluid { /* container com minha tela toda */
+    max-width: auto;
+}
+
+.container { /* container que limita o tamanho da tela */
+    max-width: 98rem;
+    margin: 0 auto;
+}
+
+.content { /* conteúdo da página */
+    margin: 3.2rem;
+}
