@@ -6,10 +6,8 @@ type LinkMenuProps = {
 
 export function LinkMenu({ children }: LinkMenuProps) {
     return (
-        <nav className={styles.linkMenu}>
-            <a href="" className={styles.linkMenuLinks}>
-                { children }
-            </a>
-        </nav>
+        <a href="" className={styles.linkMenuLinks}>
+            { children }
+        </a>
     );
 }
