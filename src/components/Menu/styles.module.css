@@ -26,3 +26,11 @@
     width: 2.4rem;
     height: auto;
 }
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-top: 3.2rem;
+}
