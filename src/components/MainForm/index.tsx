@@ -1,4 +1,4 @@
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { DefaultButton } from '../DefaultButton';
 import { Cycles } from '../Cycles';
 import { DefaultInput } from '../DefaultInput';
@@ -47,10 +47,31 @@ export function MainForm() {
                 config: { ...prevState.config },
                 activeTask: newTask,
                 currentCycle: nextCycle,
-                secondsRemaining, // conferir
+                secondsRemaining,
                 formattedSecondsRemaining:
-                    formatSecondsToMinutes(secondsRemaining), // fazer depois
+                    formatSecondsToMinutes(secondsRemaining),
                 tasks: [...prevState.tasks, newTask],
+            };
+        });
+    }
+
+    function handleInterruptTask() {
+        setState((prevState) => {
+            return {
+                ...prevState,
+                config: { ...prevState.config },
+                activeTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00',
+                tasks: prevState.tasks.map((task) => {
+                    if (
+                        prevState.activeTask &&
+                        prevState.activeTask.id === task.id
+                    ) {
+                        return { ...task, interruptDate: Date.now() };
+                    }
+                    return task;
+                }),
             };
         });
     }
@@ -69,6 +90,7 @@ export function MainForm() {
                     placeholder="Digite algo"
                     aria-label="teste"
                     ref={taskNameInput}
+                    disabled={!!state.activeTask}
                 />
             </div>
 
@@ -83,7 +105,27 @@ export function MainForm() {
             )}
 
             <div className="formRow">
-                <DefaultButton icon={<PlayCircleIcon />} />
+                {!state.activeTask && (
+                    <DefaultButton
+                        aria-label="Iniciar a tarefa"
+                        title="Iniciar a tarefa"
+                        type="submit"
+                        icon={<PlayCircleIcon />}
+                        key="botao_submit"
+                    />
+                )}
+
+                {!!state.activeTask && (
+                    <DefaultButton
+                        aria-label="Interromper a tarefa atual"
+                        title="Interromper a tarefa atual"
+                        type="button"
+                        color="red"
+                        icon={<StopCircleIcon />}
+                        onClick={handleInterruptTask}
+                        key="botao_button"
+                    />
+                )}
             </div>
         </form>
     );
