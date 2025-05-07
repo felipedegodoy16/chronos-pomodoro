@@ -1,5 +1,7 @@
 // a ideia de criar essa classe é para que ela gerencie nosso worker, ou seja, tudo que for ser usado pelo worker está aqui e fará tudo, assim, qualquer lugar do meu script que chamar o meu worker estará recebendo o mesmo worker, isso será necessário para que não fique se criando vários workers ao mesmo tempo
 
+import { TaskStateModel } from '../models/TaskStateModel';
+
 let instance: TimerWorkerManager | null = null;
 
 export class TimerWorkerManager {
@@ -23,7 +25,7 @@ export class TimerWorkerManager {
     // métodos do nosso worker, a ideia é usar as funções que o worker já tem porém como temos a classe e precisamos acessar o atributo worker dentro dela, criamos os métodos dentro da classe para isso
 
     // método para postar/enviar a mensagem
-    postMessage(message: any) {
+    postMessage(message: TaskStateModel) {
         this.worker.postMessage(message);
     }
 
