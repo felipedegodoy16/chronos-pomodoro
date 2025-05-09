@@ -9,6 +9,7 @@ import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 import { Tips } from '../Tips';
+import { showMessage } from '../../adapters/showMessage';
 
 export function MainForm() {
     const { state, dispatch } = useTaskContext();
@@ -20,13 +21,14 @@ export function MainForm() {
 
     function handleCreateNewTask(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        showMessage.dismiss();
 
         if (!taskNameInput.current) return; // validando se existe um input
 
         const taskName = taskNameInput.current.value.trim(); // o trim é usado para remover espaços desnecessários no valor digitado pelo usuário
 
         if (!taskName) {
-            alert('Digite o nome da tarefa');
+            showMessage.warn('Digite o nome da tarefa');
             return;
         }
 
@@ -41,6 +43,8 @@ export function MainForm() {
         };
 
         dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+
+        showMessage.success('Tarefa iniciada');
 
         // usando setState seria dessa forma
         // const secondsRemaining = newTask.duration * 60;
@@ -60,6 +64,10 @@ export function MainForm() {
 
     function handleInterruptTask() {
         dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
+
+        showMessage.dismiss();
+        showMessage.error('Tarefa interrompida!');
+
         // usando setState seria dessa forma, basicamente segue a mesma ideia, porém, a função está em outro arquivo, está no nosso reducer
         // setState((prevState) => {
         //     return {

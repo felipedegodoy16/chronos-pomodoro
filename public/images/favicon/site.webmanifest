@@ -25,7 +25,7 @@
     "background_color": "#0a0f1a",
     "display": "standalone",
     "display_override": ["window-controls-overlay", "minimal-ui"],
-    "orientation": "portarait",
+    "orientation": "portrait",
     "start_url": "/",
     "scope": "/",
     "description": "Gerencie seus ciclos de Pomodoro com o Chronos Pomodoro.",
