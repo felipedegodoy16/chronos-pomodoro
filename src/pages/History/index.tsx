@@ -4,11 +4,12 @@ import { DefaultButton } from '../../components/DefaultButton';
 import { Heading } from '../../components/Heading';
 import { TaskStateModel } from '../../models/TaskStateModel';
 import { MainTemplate } from '../../templates/MainTemplate';
-
-import styles from './styles.module.css';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
+import { sortTasks } from '../../utils/sortTasks';
+
+import styles from './styles.module.css';
 
 export type HomeProps = {
     state: TaskStateModel;
@@ -17,6 +18,7 @@ export type HomeProps = {
 
 export function History() {
     const { state } = useTaskContext();
+    const sortedTasks = sortTasks({ tasks: state.tasks });
 
     return (
         <MainTemplate>
@@ -48,7 +50,7 @@ export function History() {
                         </thead>
 
                         <tbody>
-                            {state.tasks.map((task) => {
+                            {sortedTasks.map((task) => {
                                 const taskTypeDictionary = {
                                     workTime: 'Foco',
                                     shortBreakTime: 'Descanso Curto',
