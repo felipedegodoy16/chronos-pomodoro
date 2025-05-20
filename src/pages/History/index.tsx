@@ -11,6 +11,7 @@ import { sortTasks, SortTasksOptions } from '../../utils/sortTasks';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
+import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export type HomeProps = {
@@ -20,6 +21,7 @@ export type HomeProps = {
 
 export function History() {
     const { state, dispatch } = useTaskContext();
+    const [confirmClearHistory, setConfirmClearHistory] = useState(false);
     const hasTasks = state.tasks.length > 0;
 
     const [sortTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
@@ -43,6 +45,14 @@ export function History() {
         }));
     }, [state.tasks]);
 
+    useEffect(() => {
+        if (!confirmClearHistory) return;
+
+        setConfirmClearHistory(false);
+
+        dispatch({ type: TaskActionTypes.RESET_STATE });
+    }, [confirmClearHistory, dispatch]);
+
     function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
         const newDirection =
             sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
@@ -59,9 +69,13 @@ export function History() {
     }
 
     function handleResetHistory() {
-        if (!confirm('Tem certeza que deseja apagar o histórico')) return;
-
-        dispatch({ type: TaskActionTypes.RESET_STATE });
+        showMessage.dismiss();
+        showMessage.confirm(
+            'Tem certeza que deseja apagar o histórico?',
+            (confirmation) => {
+                setConfirmClearHistory(confirmation);
+            }
+        );
     }
 
     return (
