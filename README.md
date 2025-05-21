@@ -1,4 +1,4 @@
-# Pomodoro Timer ⏱️
+# Chronos Pomodoro ⏱️
 
 Este projeto é um website interativo baseado na técnica Pomodoro, desenvolvido para ajudar usuários a aumentar sua produtividade, alternando períodos de foco intenso com pequenos intervalos de descanso.
 
@@ -13,12 +13,16 @@ O projeto foi construído com as seguintes tecnologias:
 
 ## 🎯 Funcionalidades
 
--   Temporizador com ciclos de 25 minutos de foco e 5 minutos de descanso.
+-   Temporizador com ciclos de 25 minutos de foco, 5 minutos de descanso e um descanso final de 15 minutos para completar um ciclo.
+-   Uma tela para o próprio usuário conseguir gerenciar os tempos que quer fazer.
+-   Um histórico das tarefas realizadas pelo usuário, mostrando os status de cada uma delas, o tempo e o que ela representa.
 -   Interface amigável e responsiva.
 -   Controle para iniciar, pausar e reiniciar o ciclo.
 -   Alerta sonoro ao final de cada período.
 
-## 📦 Como executar
+## 📦 Como acessar ou executar
+
+https://[github.com/seu-usuario/pomodoro-timer.git](https://chronos-pomodoro-coral.vercel.app/)
 
 1. Clone o repositório:
     ```bash
