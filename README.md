@@ -22,7 +22,8 @@ O projeto foi construído com as seguintes tecnologias:
 
 ## 📦 Como acessar ou executar
 
-https://[github.com/seu-usuario/pomodoro-timer.git](https://chronos-pomodoro-coral.vercel.app/)
+-   Abaixo segue o link do site hospedado na Vercel
+    [Acessar Chronos Pomodoro](https://chronos-pomodoro-coral.vercel.app/)
 
 1. Clone o repositório:
     ```bash
